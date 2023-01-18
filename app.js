@@ -1,20 +1,21 @@
 import express from "express";
-import { ErrorHandler } from "./middleware/error.js";
-import { connectDB } from "./config/connectDB.js";
-import router from "./routes/product.js";
-import bodyParser from "body-parser";
 
+import { connectDB } from "./config/connectDB.js";
+import hotel from "./routes/hotel.js";
+
+import bodyParser from "body-parser";
 const app = express();
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use(router)
+
 
 
 
 app.use(express.json())
 
+app.use(hotel)
 connectDB();
 
 
@@ -26,4 +27,3 @@ app.listen(5000, () => {
 //     console.log(msg.message)
 //     next()
 // })
-app.use(ErrorHandler)
